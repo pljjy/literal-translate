@@ -5,6 +5,7 @@ pip install -r requirements.txt
 </p>
 Then change text.txt file to the text you want to translate and run main.py but if it just closes when you type 
 your language you should open it using terminal
+<p></p>
 <p>
 python main.py
 </p>

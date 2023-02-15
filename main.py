@@ -1,3 +1,4 @@
+from time import sleep
 from deep_translator import GoogleTranslator
 from readchar import readchar
 
@@ -10,21 +11,30 @@ with open("text.txt", "r", encoding="utf-8") as file:
     charAmount = []
     for x in lines:  # counts amount of symbols per line
         charAmount.append(len(x))
-    lines = " ".join(lines).split(" ")
+    lines_temp = " ".join(lines).split(" ")
+    lines = []
+    for x in lines_temp:
+        lines.append(x.replace(" ", ""))
 
 open("text.txt", "w").close()  # clear the txt file
 
-with open("text.txt", "w", encoding="utf-8") as file:
+if lang!="ru":
+    with open("text.txt", "w", encoding="utf-8") as file:
+        print("Started translating!")
+        num = 0  # line number
+        chars = 0  # chars in the line
+        for x in lines:
+            file.write(str(translator.translate(x)) + " ")  # translate itself
+            chars += len(x + " ")
+            if chars >= charAmount[num - 1]:
+                chars = 0
+                num += 1  # goes to the next line
+                file.write("\n")
+    print("Translated")
+    print("Press Any Key To Exit...")
+    k = readchar()
+else:
     print("Started translating!")
-    num = 0  # line number
-    chars = 0  # chars in the line
-    for x in lines:
-        file.write(translator.translate(x) + " ")  # translate itself
-        chars += len(x + " ")
-        if chars >= charAmount[num - 1]:
-            chars = 0
-            num += 1  # goes to the next line
-            file.write("\n")
-print("Translated")
-print("Press Any Key To Exit...")
-k = readchar()
+    sleep(3)
+    print("Press Any Key To Exit...")
+    k = readchar()
